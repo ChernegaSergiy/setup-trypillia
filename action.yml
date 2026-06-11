@@ -1,0 +1,30 @@
+name: 'Setup Trypillia'
+description: 'Set up the Trypillia programming language environment and add it to the PATH'
+inputs:
+  version:
+    description: 'Version of Trypillia to install (currently only "latest" is supported)'
+    required: false
+    default: 'latest'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Clone Trypillia Repository
+      shell: bash
+      run: |
+        git clone https://github.com/ChernegaSergiy/trypillia-language.git /tmp/trypillia-language
+        
+    - name: Build Trypillia Core
+      shell: bash
+      run: |
+        mkdir -p /tmp/trypillia-language/build
+        cd /tmp/trypillia-language/build
+        cmake ..
+        make -j$(nproc)
+        
+    - name: Install and Add to PATH
+      shell: bash
+      run: |
+        mkdir -p $HOME/.local/bin
+        cp /tmp/trypillia-language/build/trypillia $HOME/.local/bin/trypillia
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
