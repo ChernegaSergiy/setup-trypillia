@@ -33,7 +33,8 @@ Because Trypillia is currently compiled from source, this composite action will:
 2. Build it using `cmake` and `make`.
 3. Copy the compiled `trypillia` binary to `$HOME/.local/bin` and expose it to the `$GITHUB_PATH`.
 
-*Note: In the future, this action will download pre-compiled binaries to speed up execution.*
+> [!NOTE]
+> In the future, this action will download pre-compiled binaries to speed up execution.
 
 ## Contributing
 
